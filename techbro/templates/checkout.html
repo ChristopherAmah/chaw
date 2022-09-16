@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %} {{profile.user.username|title}}'s Shopcart {% endblock title %}
+<!-- header  -->
+{% block header %} {% include 'header.html' %}{% endblock header %}
+<!-- header  -->
+
+{% block content %}
+ <!-- cart start -->
+ <div class="row">
+    <div class="col-lg-6 col-sm-12">
+          <section class="mt-5">
+            <div class="container cart">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="thead bg-dark">
+                    {% if shopcart %}
+                    {% for item in shopcart %}
+                    <tr>
+                        <th scope="col" class="text-white">Product</th>
+                        <th scope="col" class="text-white">Price</th>
+                        <th scope="col" class="text-white">Quantity</th>
+                        <th scope="col" class="text-white">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="main">
+                            <div class="d-flex">
+                              <img src="{{item.dish.image.url}}" alt="">
+                            </div>
+                            <div class="des">
+                              <p>{{item.c_name}}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <h6>{{item.c_price|floatformat:2|intcomma}}</h6>
+                        </td>
+                        <td>
+                          <div class="counter">
+                            <i class="fas fa-angle-down"></i>
+                            <input type="input-number" type="text" value="{{item.quantity}}">
+                            <i class="fas fa-angle-up"></i>
+                          </div>
+                        </td>
+                        <td>
+                          <h5>{{item.amount|floatformat:2|intcomma}}</h5>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    {% endif %}
+                    <!--  -->
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          
+              <div class="col-lg-4 offset-lg-4">
+                <div class="checkout">
+                  <ul>
+                      <li class="cart-total">Total
+                        <span>{{total|floatformat:2|intcomma}}</span>
+                      </li>
+                  </ul>
+              </div>
+            </div>
+      </section>
+   </div>
+
+      <div class="col-lg-6 col-sm-12 check">
+        <div class="container wrapper">
+          <h2>Checkout Form</h2>
+          <form class="payment" action="{% url 'payment' %}" method="POST">
+            {% csrf_token %}
+            <h4>Delivery Info</h4>
+            <div class="input_group">
+              <div class="input_box">
+                <input type="text" name="first_name" placeholder="First Name" required class="name ps-5" value="{{profile.first_name}}">
+                <i class="fa fa-user icon"></i>
+              </div>
+              <div class="input_box">
+                <input type="text" name="last_name" placeholder="Surname Name" required class="name ps-5" value="{{profile.last_name}}">
+                <i class="fa fa-user icon"></i>
+              </div>
+            </div>
+            <div class="input_group">
+              <div class="input_box">
+                <input type="email" name="email" placeholder="Email Address" required class="name ps-5" value="{{profile.email}}">
+                <i class="fa-solid fa-envelope icon"></i>
+              </div>
+            </div>
+            <div class="input_group">
+              <div class="input_box">
+                <input type="text" name="phone" placeholder="Phone Number" required class="name ps-5" value="{{profile.phone}}">
+                <i class="fa-solid fa-phone icon"></i>
+              </div>
+            </div>
+            <div class="input_group">
+              <div class="input_box">
+                <input type="Address" name="address" placeholder="Address" class="name ps-5" required value="{{profile.address}}">
+                <i class="fa fa-map-marker icon" aria-hidden="true"></i>
+              </div>
+            </div>
+            <div class="input_group">
+              <div class="input_box">
+                <input type="Address" name="city" placeholder="City" required class="name ps-5" value="{{profile.city}}">
+                <i class="fa fa-institution icon"></i>
+              </div>
+              <input type="hidden" name="total" value="{{total}}">
+            </div>
+            <div class="input_group">
+              <div class="input_box">
+                <button type="submit">Pay</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+</div>
+<!-- cart end -->
+
+
+{% endblock content %}
+    
+
+
+<!--- footer -->
+{% block footer %} {% include 'footer.html' %}{% endblock footer %}
+<!--- footer done -->

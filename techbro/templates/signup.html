@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %} Signup {% endblock title %}
+<!-- header  -->
+{% block header %} {% include 'header.html' %}{% endblock header %}
+<!-- header  -->
+
+
+{% block content %}
+<div class="chicken mt-5">
+    <div class="turkey">
+        <form class="form1" action="{% url 'signup' %}" method="POST">
+            {% csrf_token %}
+            <h1>Register</h1>
+        <div class="form-div">
+            <label for="fname">User Name</label>
+            <input type="text" class="fname" placeholder="Username" name="username" id="fname" itemid="fname" >
+        </div>
+        <div class="form-div">
+            <label for="fname">First Name</label>
+            <input type="text" class="fname" placeholder="First Name" name="first_name" id="fname" itemid="fname" >
+        </div>
+        <div class="form-div">
+            <label for="lname">Last Name</label>
+            <input type="text" class="lname" placeholder="Last Name" name="last_name" id="lname" itemid="lname" >
+        </div>
+        <div class="form-div">
+            <label for="email">Email</label>
+            <input type="text" class="email" placeholder="xxxx@yyyy.com" name="email" id="email" itemid="email" >
+        </div>
+        <div class="form-div">
+            <label for="Phone">Phone</label>
+            <input type="text" class="phone" placeholder="080xxxxxxxx" name="phone" id="phone" itemid="phone" >
+        </div>
+        <div class="form-div">
+            <label for="password">Password</label>
+            <input type="password" class="inputag" placeholder="Password" name="password1" id="password" itemid="password" >
+            <div class="hide">
+                <i class="fa-solid fa-eye-slash"></i>
+                <i class="fa-solid fa-eye"></i>
+            </div>
+        </div>
+        <div class="form-div">
+            <label for="password">Confirm Password</label>
+            <input type="password" class="input1" placeholder="Confirm password" name="password2" id="password" itemid="password" >
+            <div class="hideme">
+                <i class="fa-solid fa-eye-slash"></i>
+                <i class="fa-solid fa-eye"></i>
+            </div>
+        </div>
+        <div>
+            <input type="hidden" name="image" value="dashboard/avatar.jpg">
+        </div>
+        <div class="submit">
+            <input type="submit" value="Register">
+        </div>
+        <div class="newhere1">
+            <h5>Already have an account?</h5> 
+            <a href="{% url 'signin' %}">sign in</a>
+        </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+
+<!--- footer -->
+{% block footer %} {% include 'footer.html' %}{% endblock footer %}
+<!--- footer done -->
+    

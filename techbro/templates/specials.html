@@ -1,0 +1,19 @@
+<section class="offers">
+    <div class="container">
+      <h2 class="text-center mt-5 mb-5"><i class="fa-solid fa-gift"></i> Special Offers</h2>
+    </div>
+
+    <div class="container offer mb-5" data-aos="fade-up">
+      <div class="row justify-content-center gy-5 gx-4">
+        {% if specials %}
+          {% for item in specials %}
+            <div class="col-5 col-sm-4 col-md-3 col-lg-2 col-xl-2">
+              <div class="card">
+                <img src="{{item.image.url}}" class="card-img-top">
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </section>

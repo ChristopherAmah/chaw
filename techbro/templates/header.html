@@ -1,0 +1,85 @@
+    <nav class="navbar navbar-expand-lg navbar-light techbro">
+        <div class="container-fluid ">
+        <a class="nav-item dropdown nav-link active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-user"></i>
+            </a>
+            <ul class="dropdown-menu">
+                
+                {% if  request.user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'mycart' %}">Shopcart</a></li>
+                <li><a class="dropdown-item" href="{% url 'signout' %}">Logout</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{% url 'signin' %}">Log in</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'signup' %}">Sign up</a></li>      
+                {% endif %}
+                    
+            </ul>
+        
+        <a class="navbar-brand" href="{% url 'index' %}">ReFill</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span><i class="fa-solid fa-bars"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a> 
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'all_food' %}">Meals</a> 
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link active dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Menu
+                </a>
+                <ul class="dropdown-menu my-4" aria-labelledby="navbarDropdown"> 
+                    <li><a class="dropdown-item" href="{% url 'categories' %}">All Categories</a></li>
+                    {% if categories %}
+                        {% for item in categories %}
+                            <li><a class="dropdown-item" href="{% url 'category' item.id %}">{{item.cat_name|title}}</a></li>
+                        {% endfor %}
+                    {% endif %}     
+                </ul> 
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'mycart' %}" class="nav-link active">
+                    
+                    {% if itemcount > 0 %}
+                        <span class="badge bg-warning text-white">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                            <span class="badge bg-primary text-white">{{itemcount}}</span>
+                        </span>
+                    {% else %}
+                        <span class="badge bg-warning text-white">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                            <span class="badge bg-primary text-white">0</span>
+                        </span>
+                    {% endif %}
+                </a>
+            </li>
+            </ul>
+            <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>    
+        </div>
+        </div>
+    </nav>
+{% comment %} navbar {% endcomment %}
+
+{% comment %} messages {% endcomment %}
+
+{% if messages %}
+{% for item in  messages%}
+<div class="alert alert-secondary text-black alert-dismissible fade show mb-0" role="alert">
+    <strong>{{item}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+    {% endif %}
+    
+{% comment %} messages {% endcomment %}

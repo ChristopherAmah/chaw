@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %} {{detail.name|title}} {% endblock title %}
+<!-- header  -->
+{% block header %} {% include 'header.html' %}{% endblock header %}
+<!-- header  -->
+
+<!-- special offers  -->
+{% block specials %} {% include 'specials.html' %} {% endblock specials %}
+<!-- special offer  -->
+
+{% block content %}
+<section class="meals">
+    <div class="container">
+      <h2 class="text-center mt-5 mb-5"><i class="fa-solid fa-bowl-food"></i>{{detail.name|title}} Details</h2>
+    </div>
+    <div class="container">
+      <div class="row justify-content-center gy-5 gx-4">
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+        </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+              <div class="card">
+                <img src="{{detail.image.url}}" class="card-img-top">
+                <div class="card-body text-center">
+                  <h3 class="card-title">{{detail.name|title}}</h3>
+                  <p class="card-text">$ {{detail.price}}</p>
+                  <p class="card-text text-truncate">{{detail.description|title}}</p>
+                  <form action="{% url 'ordermeal' %}" method="POST"> 
+                  {% csrf_token %}
+                    <input type="hidden" name="mealid" value="{{detail.id}}">
+                    <input type="number" name="mealquantity" value="1" min="{{detail.min}}" max="{{detail.max}}" style="width: 60px;">
+                    <button class="btn btn-secondary"><i class="fa-solid fa-cart-arrow-down"></i></button>
+                  </form> 
+                </div>
+              </div>
+            </div>
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+            </div>  
+      </div>
+    </div>
+  </section>
+
+
+{% endblock content %}
+    
+
+
+<!--- footer -->
+{% block footer %} {% include 'footer.html' %}{% endblock footer %}
+<!--- footer done -->

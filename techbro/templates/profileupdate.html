@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}{{profile_data.user.username|title}} {% endblock title %}
+<!-- header  -->
+{% block header %} {% include 'header.html' %}{% endblock header %}
+<!-- header  -->
+
+{% block content %}
+<div class="dashhead">
+    <h2>{{profile_data.user.username|title}} Dashboard</h2>
+</div>
+
+<section class="bigger">
+    <div class="row text-center">
+        
+       {% include 'dash_sidebar.html' %}
+
+        <div class="col-5 col-sm-6 col-md-3 col-lg-2 col-xl-8 base">
+            <div class="basic">
+                <div class="basicheader">
+                    <h2>Profile Update</h2>
+                </div>
+                <div class="profileicon">
+                    
+                    <img src="{{profile_data.profile_pix.url}}">
+                </div>
+                <div class="info">
+                    <div class="form1">
+                        <div class="address">
+                            <form class="ade" action="{% url 'profileupdate' %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class= "form-group">
+                                    {{form}}
+                                </div>
+                                <button type="submit" class="btn btn-secondary text-white">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+      </div>
+</section>
+{% endblock content %}
+    
+
+<!--- footer -->
+{% block footer %} {% include 'footer.html' %}{% endblock footer %}
+<!--- footer done -->
