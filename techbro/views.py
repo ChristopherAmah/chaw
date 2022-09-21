@@ -346,7 +346,7 @@ def payment(request):
     if request.method == 'POST': #integrate API
         api_key = 'sk_test_378e7a9f7c1350b2370e142227e7a82a54b638f4'
         curl = 'https://api.paystack.co/transaction/initialize'
-        cburl = 'http://54.88.9.232/completed'
+        cburl = 'http://44.211.129.102/completed'
         # cburl = 'http://127.0.0.1:8000/completed'
         ref_code = str(uuid.uuid4())
         user = User.objects.get(username = request.user.username)
