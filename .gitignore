@@ -4,7 +4,7 @@
 __pycache__/
 local_settings.py
 venv
-git_token.html
-db.sqlite3
-db.sqlite3-journal
-media
+# git_token.html
+# db.sqlite3
+# db.sqlite3-journal
+# media
