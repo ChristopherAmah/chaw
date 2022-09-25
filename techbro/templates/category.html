@@ -29,7 +29,12 @@
                 <h3 class="card-title">Name: {{item.name|title}}</h3>
                 <p class="card-text">Price: $ {{item.price}}</p>
                 <p class="card-text text-truncate">Description: {{item.description|title}}</p>
-                <a href="#" class="btn btn-secondary"><i class="fa-solid fa-cart-arrow-down"></i></a>
+                <form action="{% url 'ordermeal' %}" method="POST"> 
+                  {% csrf_token %}
+                    <input type="hidden" name="mealid" value="{{item.id}}">
+                    <input type="hidden" name="mealquantity" value="1" min="{{item.min}}" max="{{item.max}}" style="width: 60px;">
+                    <button class="btn btn-secondary"><i class="fa-solid fa-cart-arrow-down"></i></button>
+                  </form>
               </div>
             </div>
           </div>
